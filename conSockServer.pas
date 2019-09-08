@@ -68,6 +68,8 @@ type
     property State: TConConnectState read Fstate;  //De solo lectura
     function HaveCommad: boolean;
   public
+    CommMessages: boolean;   //Enable Communication messages
+    FrameMessages: boolean;  //Enable Frame processing messages
     procedure Connect;
     procedure Disconnect;
     procedure PutCommand(command: byte; ParamX, ParamY: word; const data: string='');
@@ -270,6 +272,8 @@ begin
   thr.OnTerminate    := @thrTerminate;    //Para detectar que ha muerto
   thr.OnRegMessage   := @thrRegMessage;   //Para recibir mensajes
   thr.OnFrameReady   := @thrFrameReady;
+  thr.CommMessages :=  CommMessages;
+  thr.FrameMessages := FrameMessages;
   // Inicia el hilo. Aquí empezará con el estado "Conectando"
   thr.Start;
 end;
@@ -286,9 +290,11 @@ begin
 end;
 constructor TConSockServer.Create(port0: string);
 begin
-  Fport := port0;       //Default port
+  Fport := port0;         //Default port
+  CommMessages := true;   //Default setting
+  FrameMessages := false; //Default setting
   Fstate := cecDEAD;  //Este es el estado inicial, porque no se ha creado el hilo
-  Connect;
+  Connect;  //Start connection
 end;
 destructor TConSockServer.Destroy;
 begin

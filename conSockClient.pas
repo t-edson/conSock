@@ -75,8 +75,10 @@ type
     function stateStr: string;
     property IP: string read FIP write SetIP;
   public
-    MsgError: string;       //Mensajes de error producidos.
-    MsgsConn: TstringList;  //Almacena los últimos mensajes de la conexión.
+    MsgError: string;       //Last error message string.
+    MsgsConn: TstringList;  //Last messages from connection.
+    CommMessages: boolean;   //Enable Communication messages.
+    FrameMessages: boolean;  //Enable Frame processing messages.
     procedure Connect;
     procedure Disconnect;
     procedure SendWakeOnLan;
@@ -268,6 +270,8 @@ begin
   thr.OnTerminate    := @thrTerminate;    //Para detectar que ha muerto
   thr.OnRegMessage   := @thrRegMessage;   //Para recibir mensajes
   thr.OnFrameReady   := @thrFrameReady;
+  thr.CommMessages :=  CommMessages;
+  thr.FrameMessages := FrameMessages;
   // Inicia el hilo. Aquí empezará con el estado "Conectando"
   thr.Start;
 end;
@@ -294,8 +298,10 @@ begin
   MsgsConn:= TstringList.Create;
   FIP := ip0;
   Fport := port0;
+  CommMessages := true;   //Default setting
+  FrameMessages := false; //Default setting
   Fstate := cecDEAD;  //este es el estado inicial, porque no se ha creado el hilo
-  //Conectar;  //No inicia la conexión
+  //Connect;  //No inicia la conexión
 end;
 destructor TConSockClient.Destroy;
 begin

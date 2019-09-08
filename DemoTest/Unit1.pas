@@ -37,7 +37,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure srvSendClick(Sender: TObject);
   private
-    client: TConSockClient;
+    Client: TConSockClient;
     Server: TConSockServer;
     procedure clientChangeState(newState: TConConnectState);
     procedure clientFrameReady(NomPC: string; tram: TConFrame);
@@ -61,29 +61,35 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   //Set client
-  client := TConSockClient.Create('127.0.0.1');
-  client.OnFrameReady := @clientFrameReady;
-  client.OnChangeState := @clientChangeState;
-  client.OnRegMessage := @clientRegMessage;
+  Client := TConSockClient.Create('127.0.0.1', '80');
+  Client.FrameMessages := true;
+  Client.OnFrameReady  := @clientFrameReady;
+  Client.OnChangeState := @clientChangeState;
+  Client.OnRegMessage  := @clientRegMessage;
+  lblClient.Caption    := StateToString(Client.state);
 //  client.Connect;
   //Set server
-  Server := TConSockServer.Create;
-  Server.OnFrameReady := @ServerFrameReady;
+  Server := TConSockServer.Create('80');
+  Server.Disconnect;
+  Server.FrameMessages := true;
+  Server.Connect;  //To update "FrameMessages"
+  Server.OnFrameReady  := @ServerFrameReady;
   Server.OnChangeState := @ServerChangeState;
-  Server.OnRegMessage := @ServerRegMessage;
+  Server.OnRegMessage  := @ServerRegMessage;
+  lblServer.Caption    := StateToString(Server.state);
 //  Server.Connect;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
   Server.Destroy;
-  client.Destroy;
+  Client.Destroy;
 end;
 
 ///////////////// Client //////////////////
 procedure TForm1.chkClientChange(Sender: TObject);
 begin
-  if chkClient.Checked then client.Connect else client.Disconnect;
+  if chkClient.Checked then Client.Connect else Client.Disconnect;
 end;
 procedure TForm1.clientFrameReady(NomPC: string; tram: TConFrame);
 begin
@@ -109,7 +115,7 @@ end;
 
 procedure TForm1.cliSendClick(Sender: TObject);
 begin
-  client.SendCommand($FF, 0, 0, edClient.Text);
+  Client.SendCommand($FF, 0, 0, edClient.Text);
 end;
 
 procedure TForm1.btnClearClick(Sender: TObject);

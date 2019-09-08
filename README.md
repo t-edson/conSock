@@ -79,6 +79,7 @@ To implements a simple connection, it's needed to create a client part and a ser
   client := TConSockClient.Create('127.0.0.1');
   client.OnFrameReady := @clientFrameReady;
   client.Connect;
+  
   //Set server
   Server := TConSockServer.Create;
   Server.OnFrameReady := @ServerFrameReady;

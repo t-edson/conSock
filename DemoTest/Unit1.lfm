@@ -90,7 +90,7 @@ object Form1: TForm1
     Top = 250
     Width = 168
     TabOrder = 5
-    Text = 'Hello'
+    Text = 'Hi'
   end
   object txtClientLog: TMemo
     Left = 8

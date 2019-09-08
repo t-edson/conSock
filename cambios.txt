@@ -2,6 +2,7 @@ v 0.4
 =====
 Se crean constantes para parametrizar el periodo en que se temporizan los mensajes de 
 red. Se mueven a constantes, algunos mensajes.
+Se crean banderas para habilitar la generación de mensajes de registro en TConBaseConnect.
 
 v 0.3
 =====

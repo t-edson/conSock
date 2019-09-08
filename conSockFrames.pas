@@ -125,8 +125,10 @@ type //Manejo de la conexión con hilos
     OnChangeState : TEvChangeState; //Cambio en estado de la conexión
     procedure SetState(AValue: TConConnectState);
     procedure RegMessage(msje: string);
-    procedure ProcFrameRegMessage(NomPC: string; msj: string);
+    procedure ProcFrameRegMessage(Source: string; msj: string);
   public
+    CommMessages: boolean;   //Enable Communication messages
+    FrameMessages: boolean;  //Enable Frame processing messages
     property State: TConConnectState read FState write SetState;
     function Connected: boolean;
     function StateStr: string;
@@ -184,11 +186,13 @@ end;
 procedure TConBaseConnect.RegMessage(msje: string);
 {Procedimiento para generar un mensaje dentro del hilo.}
 begin
+  if not CommMessages then exit;
   tmpRegMsje := msje;
   Synchronize(@EventRegMessage);
 end;
-procedure TConBaseConnect.ProcFrameRegMessage(NomPC: string; msj: string);
+procedure TConBaseConnect.ProcFrameRegMessage(Source: string; msj: string);
 begin
+  if not FrameMessages then exit;
   //Genera mensajes detallados de la conexión
   tmpRegMsje := msj;
   Synchronize(@EventRegMessage);
