@@ -1,0 +1,28 @@
+v 0.4
+=====
+Se crean constantes para parametrizar el periodo en que se temporizan los mensajes de 
+red. Se mueven a constantes, algunos mensajes.
+
+v 0.3
+=====
+Se traducen, a inglés, algunos nombres de variables y mensajes de la conexión.
+Se cambia la temporización del lado cliente para mantener la comunicación viva, de 
+forma constante.
+Se modifica el código de TThreadSockClient.Open() para hacerlo más legible y se inserta
+directamente dentro de TThreadSockClient.OpenConnection().
+Se quita el estado por defecto de "Conectado" cuadno se logra abrir el socket y se 
+corrige el estado "Conectado" cuando se pierde la conexión.
+
+v 0.2
+=====
+Se reordenan la ubicaicón y el alcance de algunos métodos de las clases en el lado 
+cliente y servidor.
+Se traducen, a inglés, algunos nombres de variables y mensajes de la conexión.
+Se hace que el puerto sea configurable en el lado del servidor y del cliente.
+
+v 0.1
+=====
+Se renombra el método TConFrameProc.DatosRecibidos() a ProcessReceived().
+Se elimina el campo TConFrameProc.frameState. Ahora solo se usará la bandera BytesWait.
+Se reescribe gran parte de la rutina TConFrameProc.ProcessReceived(). Se simplifica y 
+corrigen algunos errores.

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="6">
+      <Unit0>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="213"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="Unit1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="93"/>
+        <CursorPos Y="114"/>
+        <FoldState Value=" T4602 T5i8[748c281 T3iX04032121]LMiO01!"/>
+        <UsageCount Value="213"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\conSockClient.pas"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="55"/>
+        <ExtraEditorCount Value="1"/>
+        <ExtraEditor1>
+          <IsVisibleTab Value="True"/>
+          <EditorIndex Value="-1"/>
+          <WindowIndex Value="1"/>
+          <CursorPos X="6" Y="15"/>
+        </ExtraEditor1>
+        <UsageCount Value="107"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\conSockServer.pas"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="51" Y="4"/>
+        <FoldState Value=" TLO24011 T7i8JP T3ib0C1k"/>
+        <UsageCount Value="107"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\conSockFrames.pas"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="407"/>
+        <CursorPos X="35" Y="426"/>
+        <ExtraEditorCount Value="1"/>
+        <ExtraEditor1>
+          <EditorIndex Value="-1"/>
+          <TopLine Value="16"/>
+          <CursorPos X="17" Y="19"/>
+        </ExtraEditor1>
+        <UsageCount Value="107"/>
+        <Bookmarks Count="1">
+          <Item0 Y="388" ID="1"/>
+        </Bookmarks>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\synapse40\source\lib\blcksock.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="714"/>
+        <CursorPos X="25" Y="730"/>
+        <UsageCount Value="13"/>
+      </Unit5>
+    </Units>
+    <JumpHistory Count="26" HistoryIndex="25">
+      <Position1>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" Column="33" TopLine="81"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="30" Column="15" TopLine="12"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" Column="33" TopLine="58"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="104" Column="33" TopLine="74"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" Column="33" TopLine="74"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="30" Column="15" TopLine="12"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" Column="33" TopLine="58"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="108" Column="9" TopLine="78"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" Column="29" TopLine="78"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="108" Column="9" TopLine="78"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" Column="29" TopLine="78"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="108" Column="9" TopLine="78"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="88" TopLine="85"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="29" Column="19" TopLine="12"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="92" Column="25" TopLine="86"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="126" Column="8" TopLine="108"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="135" Column="23" TopLine="96"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="16" Column="18"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="198" Column="39" TopLine="168"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="136" Column="31" TopLine="116"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="17" Column="20"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="124" Column="11" TopLine="117"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\conSockServer.pas"/>
+        <Caret Line="151" Column="15" TopLine="133"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\conSockServer.pas"/>
+        <Caret Line="153" TopLine="138"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\conSockClient.pas"/>
+        <Caret Line="92" Column="28" TopLine="73"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\conSockServer.pas"/>
+        <Caret Line="23" TopLine="22"/>
+      </Position26>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

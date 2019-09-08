@@ -1,0 +1,150 @@
+object Form1: TForm1
+  Left = 256
+  Height = 562
+  Top = 154
+  Width = 545
+  Caption = 'Test'
+  ClientHeight = 562
+  ClientWidth = 545
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '2.0.0.4'
+  object txtClient: TMemo
+    Left = 8
+    Height = 184
+    Top = 57
+    Width = 256
+    Lines.Strings = (
+      ''
+    )
+    TabOrder = 0
+  end
+  object txtServer: TMemo
+    Left = 275
+    Height = 184
+    Top = 57
+    Width = 261
+    TabOrder = 1
+  end
+  object cliSend: TButton
+    Left = 183
+    Height = 25
+    Top = 248
+    Width = 75
+    Caption = 'Send'
+    OnClick = cliSendClick
+    TabOrder = 2
+  end
+  object srvSend: TButton
+    Left = 447
+    Height = 25
+    Top = 248
+    Width = 75
+    Caption = 'Send'
+    OnClick = srvSendClick
+    TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 33
+    Width = 39
+    Caption = 'CLIENT'
+    ParentColor = False
+  end
+  object lblClient: TLabel
+    Left = 78
+    Height = 15
+    Top = 32
+    Width = 44
+    Caption = 'lblClient'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 272
+    Height = 15
+    Top = 32
+    Width = 39
+    Caption = 'SERVER'
+    ParentColor = False
+  end
+  object lblServer: TLabel
+    Left = 352
+    Height = 15
+    Top = 32
+    Width = 45
+    Caption = 'lblServer'
+    ParentColor = False
+  end
+  object edClient: TEdit
+    Left = 8
+    Height = 23
+    Top = 248
+    Width = 173
+    TabOrder = 4
+    Text = 'Hello'
+  end
+  object edServer: TEdit
+    Left = 272
+    Height = 23
+    Top = 250
+    Width = 168
+    TabOrder = 5
+    Text = 'Hello'
+  end
+  object txtClientLog: TMemo
+    Left = 8
+    Height = 272
+    Top = 280
+    Width = 256
+    ScrollBars = ssBoth
+    TabOrder = 6
+    WordWrap = False
+  end
+  object txtServerLog: TMemo
+    Left = 272
+    Height = 272
+    Top = 280
+    Width = 264
+    ScrollBars = ssBoth
+    TabOrder = 7
+    WordWrap = False
+  end
+  object btnClear: TButton
+    Left = 256
+    Height = 25
+    Top = 0
+    Width = 75
+    Caption = 'Clear'
+    OnClick = btnClearClick
+    TabOrder = 8
+  end
+  object chkClient: TCheckBox
+    Left = 176
+    Height = 19
+    Top = 32
+    Width = 65
+    Caption = 'Connect'
+    OnChange = chkClientChange
+    TabOrder = 9
+  end
+  object chkServer: TCheckBox
+    Left = 432
+    Height = 19
+    Top = 32
+    Width = 65
+    Caption = 'Connect'
+    OnChange = chkServerChange
+    TabOrder = 10
+  end
+  object chkLog: TCheckBox
+    Left = 184
+    Height = 19
+    Top = 0
+    Width = 64
+    Caption = 'Logging'
+    Checked = True
+    State = cbChecked
+    TabOrder = 11
+  end
+end

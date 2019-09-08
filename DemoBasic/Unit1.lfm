@@ -1,0 +1,78 @@
+object Form1: TForm1
+  Left = 256
+  Height = 281
+  Top = 154
+  Width = 545
+  Caption = 'Cliente'
+  ClientHeight = 281
+  ClientWidth = 545
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  LCLVersion = '2.0.0.4'
+  object txtClient: TMemo
+    Left = 8
+    Height = 184
+    Top = 57
+    Width = 256
+    Lines.Strings = (
+      ''
+    )
+    TabOrder = 0
+  end
+  object txtServer: TMemo
+    Left = 275
+    Height = 184
+    Top = 57
+    Width = 261
+    TabOrder = 1
+  end
+  object cliSend: TButton
+    Left = 183
+    Height = 25
+    Top = 248
+    Width = 75
+    Caption = 'Send'
+    OnClick = cliSendClick
+    TabOrder = 2
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 33
+    Width = 39
+    Caption = 'CLIENT'
+    ParentColor = False
+  end
+  object lblClient: TLabel
+    Left = 78
+    Height = 15
+    Top = 32
+    Width = 44
+    Caption = 'lblClient'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 272
+    Height = 15
+    Top = 32
+    Width = 39
+    Caption = 'SERVER'
+    ParentColor = False
+  end
+  object lblServer: TLabel
+    Left = 352
+    Height = 15
+    Top = 32
+    Width = 45
+    Caption = 'lblServer'
+    ParentColor = False
+  end
+  object edClient: TEdit
+    Left = 8
+    Height = 23
+    Top = 248
+    Width = 173
+    TabOrder = 3
+    Text = 'Hello'
+  end
+end
