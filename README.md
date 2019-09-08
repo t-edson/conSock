@@ -84,6 +84,8 @@ To implements a simple connection, it's needed to create a client part and a ser
   Server.OnFrameReady := @ServerFrameReady;
 ```
 
+The event OnFrameReady is trigered every time a Frame is received.
+
 The state of the connection can be read in the field client.state and in server.State. This state can be:
 
 * cecCONNECTING
