@@ -22,7 +22,7 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="55"/>
-        <CursorPos X="9" Y="75"/>
+        <CursorPos X="15" Y="71"/>
         <FoldState Value=" T4602 T5i8[748i421 T3id040411212G"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
@@ -33,7 +33,6 @@
         <EditorIndex Value="1"/>
         <TopLine Value="274"/>
         <CursorPos X="12" Y="304"/>
-        <FoldState Value=" T3nJ0A19"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
@@ -48,7 +47,6 @@
         <EditorIndex Value="2"/>
         <TopLine Value="271"/>
         <CursorPos X="31" Y="297"/>
-        <FoldState Value=" TLO24011 T3id0C1G1."/>
         <UsageCount Value="107"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -57,7 +55,6 @@
         <EditorIndex Value="3"/>
         <TopLine Value="105"/>
         <CursorPos Y="132"/>
-        <FoldState Value=" T3kI0H2211E piYkX08722W"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
