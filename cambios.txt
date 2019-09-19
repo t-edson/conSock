@@ -1,3 +1,13 @@
+v 0.5
+=====
+Se definen los periodos que determinan la conexión, como constantes, para poder 
+configurarlos.
+Se crea la propiedad TConSockClient.port, para poder cambiar el puerto.
+Se define que el modulo servidor inicie desconectado, por defecto. Antes iniciaba conectado.
+Se modifica el constructor TThreadSockServer.Create() para que reciba el puerto.
+Se cambia de lugar la inicialización de "ticsNoSending" en el módulo cliente.
+Se agregan protecciones adicionales para cuando la conexión se encuentra cerrada.
+
 v 0.4
 =====
 Se crean constantes para parametrizar el periodo en que se temporizan los mensajes de 

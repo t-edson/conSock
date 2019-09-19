@@ -1,10 +1,10 @@
 {Part of the conSock library that implements a TCP/IP server, prepared to respond
 requests in the Frame format defined in conSockFrames.
 Requires the Synapse library.
-The main class is TConSockServer, what is a thread, que hace la comunicación con el
-exterior, usando eventos sincronizados.
+The main class is TConSockClient, wich is a thread that make communication using
+synchronized events.
 
-                                              Creado por: Tito Hinostroza  05/2015.
+                                              Created by: Tito Hinostroza  05/2015.
                                               Modificado por: Tito Hinostroza 17/08/2019
 }
 unit conSockServer;
@@ -29,6 +29,7 @@ type
   cecCONNECTING -> cecCONNECTED }
   TThreadSockServer = class(TConBaseConnect)
   private
+    port: string;   //port where listening.
     cmdsStack: TCommStack;        //Pila de comandos
     procedure ProcConex(Hsock: TSocket);
   public
@@ -39,8 +40,7 @@ type
     procedure PutCommand(comm: byte; ParamX, ParamY: word; const data: string = '');
     function HaveCommand: boolean;
   public //Initializing
-    port: string;   //port where listening.
-    Constructor Create;
+    Constructor Create(port0: string);
     Destructor Destroy; override;
   end;
 
@@ -188,8 +188,9 @@ begin
   Result := cmdsStack.HaveCommand;
 end;
 //Constructor y destructor
-constructor TThreadSockServer.Create;
+constructor TThreadSockServer.Create(port0: string);
 begin
+  port := port0;
   FState := cecCONNECTING; {Estado inicial. Aún no está conectando, pero se asume que
                              está en proceso de conexión. Además, no existe estado
                              "cecDetenido" para TThreadSockCabina.
@@ -229,6 +230,7 @@ end;
 procedure TConSockServer.PutCommand(command: byte; ParamX, ParamY: word;
   const data: string);
 begin
+  if thr = nil then exit;
   thr.PutCommand(command, ParamX, ParamY, data);
 end;
 function TConSockServer.Connected: boolean;
@@ -265,15 +267,15 @@ begin
     thr := nil;
     //Festado := cecMuerto;  //No es muy útil, fijar este estado, porque seguidamente se cambiará
   end;
-  thr := TThreadSockServer.Create;
-  thr.port := Fport;
-  thr.OnChangeState := @thrChangeState; //Para detectar cambios de estado
-  thr.OnChangeState(thr.State);         //Genera el primer evento de estado
-  thr.OnTerminate    := @thrTerminate;    //Para detectar que ha muerto
-  thr.OnRegMessage   := @thrRegMessage;   //Para recibir mensajes
-  thr.OnFrameReady   := @thrFrameReady;
-  thr.CommMessages :=  CommMessages;
-  thr.FrameMessages := FrameMessages;
+  thr := TThreadSockServer.Create(Fport);
+  thr.CommMessages  := CommMessages;     //Set property
+  thr.FrameMessages := FrameMessages;    //Set property
+  //Set events
+  thr.OnChangeState := @thrChangeState;  //Para detectar cambios de estado
+  thr.OnChangeState(thr.State);          //Genera el primer evento de estado
+  thr.OnTerminate   := @thrTerminate;    //Para detectar que ha muerto
+  thr.OnRegMessage  := @thrRegMessage;   //Para recibir mensajes
+  thr.OnFrameReady  := @thrFrameReady;
   // Inicia el hilo. Aquí empezará con el estado "Conectando"
   thr.Start;
 end;
@@ -294,12 +296,14 @@ begin
   CommMessages := true;   //Default setting
   FrameMessages := false; //Default setting
   Fstate := cecDEAD;  //Este es el estado inicial, porque no se ha creado el hilo
-  Connect;  //Start connection
+  //Connect;  //Start connection
 end;
 destructor TConSockServer.Destroy;
 begin
-  thr.OnFrameReady:=nil;  //para evitar eventos al morir
-  thr.OnRegMessage:=nil;  //para evitar eventos al morir
+  if thr<>nil then begin
+    thr.OnFrameReady:=nil;  //para evitar eventos al morir
+    thr.OnRegMessage:=nil;  //para evitar eventos al morir
+  end;
   if Fstate<>cecDEAD then begin
     if thr = nil then begin
       {Este es un caso especial, cuando no se llegó a conectar nunca el hilo}

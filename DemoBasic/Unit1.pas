@@ -50,6 +50,7 @@ begin
   Server := TConSockServer.Create;
   Server.OnFrameReady := @ServerFrameReady;
   Server.OnChangeState := @ServerChangeState;
+  Server.Connect;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);

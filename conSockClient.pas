@@ -1,8 +1,8 @@
 {Part of the conSock library that implements a TCP/IP client, prepared to generate
 requests in the Frame format defined in conSockFrames.
 Requires the Synapse library.
-The main class is TConSockClient, what is a thread, que hace la comunicación con el
-exterior, usando eventos sincronizados.
+The main class is TConSockClient, wich is a thread that make communication using
+synchronized events.
 
                                               Created by: Tito Hinostroza  17/08/2019
 }
@@ -14,10 +14,11 @@ uses
 
 const
   MAX_LIN_MSJ_CNX = 10;    //Max. number of lines saved in connectios messages.
-  PER_SEND_PRESENCE = 50;  //Period (in seconds times 10) to send C_PRESENCE command.
-  PER_WAIT_PRESENCE = 100; //Period (in seconds times 10) to wait M_PRESENCE command or any response.
   MSG_OPENIG_PORT  = 'Opening port ...';
   MSG_CONNECT_ERROR ='!Connection error.';
+var
+  perSendPresence: integer = 50;  //Period (in seconds times 10) to send C_PRESENCE command.
+  perWaitPresence: integer = 100; //Period (in seconds times 10) to wait M_PRESENCE command or any response.
 
 type
 
@@ -30,13 +31,14 @@ type
   TThreadSockClient = class(TConBaseConnect)
   private
     ip: string;   //IP del servidor al que se conectará
+    port: string;
     procedure OpenConnection;
   protected
+    ticsNoSending: Integer;
     procedure Execute; override;
   public
-    port: string;
     procedure sendCommand(comm: byte; ParamX, ParamY: word; data: string = '');
-    constructor Create(ip0: string);
+    constructor Create(ip0: string; port0: string);
     Destructor Destroy; override;
   end;
 
@@ -62,6 +64,7 @@ type
     function GetStateN: integer;
     procedure SetStateN(AValue: integer);
     procedure SetIP(AValue: string);
+    procedure SetPort(AValue: string);
   public   //Events
     OnChangeState: TEvChangeState;
     OnRegMessage  : TEvRegMessage;  //Indica que ha llegado un mensaje de la conexión
@@ -74,6 +77,7 @@ type
     property stateN: integer read GetStateN write SetStateN;
     function stateStr: string;
     property IP: string read FIP write SetIP;
+    property port: string read Fport write SetPort;
   public
     MsgError: string;       //Last error message string.
     MsgsConn: TstringList;  //Last messages from connection.
@@ -114,7 +118,6 @@ end;
 procedure TThreadSockClient.Execute;
 var
   buffer: String = '';
-  ticsNoSending: Integer;
   ticsNoReceiving: Integer;
 begin
   OpenConnection;
@@ -131,21 +134,21 @@ begin
       // Hubo datos
       State := cecCONNECTED;  //Solo cuando hay respuesta, asumimos que hay conexión.
       RegMessage(IntToStr(length(buffer)) +  ' bytes received.');
-      ticsNoSending := 0;
+      //ticsNoSending := 0;
       ticsNoReceiving := 0;
       ProcFrame.ProcessReceived(buffer, @ProcessFrame);
     end;
     Inc(ticsNoSending);
     Inc(ticsNoReceiving);
 //    if tics mod 10 = 0 then RegMensaje('  tic=' + IntToStr(tics));
-    if ticsNoSending>PER_SEND_PRESENCE+1 then begin
+    if ticsNoSending>perSendPresence+1 then begin
       //No se ha enviado ningún comando en 5 segundos. Genera uno propio para mantner la conexión.
       RegMessage('Sending C_PRESENCE.');
       sock.SendString(CreateHeader(0, C_PRESENCE));
       ticsNoSending := 0;
     end;
-    if ticsNoReceiving>PER_WAIT_PRESENCE then begin
-      //probablemente se cortó la conexión
+    if ticsNoReceiving>perWaitPresence then begin
+      //Probablemente se cortó la conexión
       RegMessage('Connection lost.');
       sock.CloseSocket;  //cierra conexión
       OpenConnection;
@@ -160,8 +163,10 @@ procedure TThreadSockClient.sendCommand(comm: byte; ParamX, ParamY: word;
 var
   s: string;
 begin
-  if State <> cecCONNECTED then
+  if State <> cecCONNECTED then begin
     exit;
+  end;
+  ticsNoSending := 0;   //Clear flag
   //Se debe enviar una trama
   writestr(s, comm);
   RegMessage('  >>Sent: ' + s + ' ');
@@ -174,9 +179,10 @@ begin
     sock.SendString(data);
   end;
 end;
-constructor TThreadSockClient.Create(ip0: string);
+constructor TThreadSockClient.Create(ip0: string; port0: string);
 begin
   ip := ip0;
+  port := port0;
   FState := cecCONNECTING; {Estado inicial. Aún no está conectando, pero se asume que
                              está en proceso de conexión. Además, no existe estado
                              "cecDetenido" para TThreadSockClient.
@@ -230,11 +236,20 @@ begin
 end;
 procedure TConSockClient.SetIP(AValue: string);
 begin
-  //solo se puede cambiar la IP cuando no hay conexión
+  //Only it can be changed when it's not connected.
   if state in [cecDEAD, cecSTOPPED] then begin
-    FIP:=AValue;
+    FIP := AValue;
   end else begin
     self.MsgError := 'Cannot change IP when connection is established or in progress.';
+  end;
+end;
+procedure TConSockClient.SetPort(AValue: string);
+begin
+  //Only it can be changed when it's not connected.
+  if state in [cecDEAD, cecSTOPPED] then begin
+    Fport := AValue;
+  end else begin
+    self.MsgError := 'Cannot change port when connection is established or in progress.';
   end;
 end;
 function TConSockClient.GetStateN: integer;
@@ -263,15 +278,15 @@ begin
     thr := nil;
     //Festado := cecDEAD;  //No es muy útil, fijar este estado, porque seguidamente se cambiará
   end;
-  thr := TThreadSockClient.Create(FIP);
-  thr.port := Fport;
+  thr := TThreadSockClient.Create(FIP, Fport);
+  thr.CommMessages  := CommMessages;   //Set property
+  thr.FrameMessages := FrameMessages;  //Set property
+  //Set events
   thr.OnChangeState := @thrChangeState; //Para detectar cambios de estado
   thr.OnChangeState(thr.State);         //Genera el primer evento de estado
-  thr.OnTerminate    := @thrTerminate;    //Para detectar que ha muerto
-  thr.OnRegMessage   := @thrRegMessage;   //Para recibir mensajes
-  thr.OnFrameReady   := @thrFrameReady;
-  thr.CommMessages :=  CommMessages;
-  thr.FrameMessages := FrameMessages;
+  thr.OnTerminate   := @thrTerminate;   //Para detectar que ha muerto
+  thr.OnRegMessage  := @thrRegMessage;  //Para recibir mensajes
+  thr.OnFrameReady  := @thrFrameReady;
   // Inicia el hilo. Aquí empezará con el estado "Conectando"
   thr.Start;
 end;
@@ -301,7 +316,7 @@ begin
   CommMessages := true;   //Default setting
   FrameMessages := false; //Default setting
   Fstate := cecDEAD;  //este es el estado inicial, porque no se ha creado el hilo
-  //Connect;  //No inicia la conexión
+  //Connect;  //Start connection
 end;
 destructor TConSockClient.Destroy;
 begin

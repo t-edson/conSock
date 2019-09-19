@@ -1,4 +1,4 @@
-ConSock 0.4
+ConSock 0.5
 ===========
 
 ConSock is a Lazarus library that implements TCP/IP connections, in Client-Server mode, using sockets.
@@ -83,6 +83,7 @@ To implements a simple connection, it's needed to create a client part and a ser
   //Set server
   Server := TConSockServer.Create;
   Server.OnFrameReady := @ServerFrameReady;
+  Server.Connect;
 ```
 
 The event OnFrameReady is trigered every time a Frame is received.

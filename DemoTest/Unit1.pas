@@ -62,7 +62,7 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   //Set client
   Client := TConSockClient.Create('127.0.0.1', '80');
-  Client.FrameMessages := true;
+  Client.FrameMessages := true;  //Enable message from the frame processor
   Client.OnFrameReady  := @clientFrameReady;
   Client.OnChangeState := @clientChangeState;
   Client.OnRegMessage  := @clientRegMessage;
@@ -70,9 +70,7 @@ begin
 //  client.Connect;
   //Set server
   Server := TConSockServer.Create('80');
-  Server.Disconnect;
-  Server.FrameMessages := true;
-  Server.Connect;  //To update "FrameMessages"
+  Server.FrameMessages := true;  //Enable message from the frame processor
   Server.OnFrameReady  := @ServerFrameReady;
   Server.OnChangeState := @ServerChangeState;
   Server.OnRegMessage  := @ServerRegMessage;

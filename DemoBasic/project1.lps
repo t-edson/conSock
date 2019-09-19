@@ -21,8 +21,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="44"/>
-        <CursorPos X="25" Y="76"/>
+        <TopLine Value="35"/>
+        <CursorPos X="18" Y="53"/>
         <UsageCount Value="213"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -42,15 +42,17 @@
       </Unit2>
       <Unit3>
         <Filename Value="..\conSockServer.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="49"/>
-        <CursorPos X="21" Y="68"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="230"/>
+        <CursorPos X="7" Y="305"/>
         <UsageCount Value="107"/>
+        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\conSockFrames.pas"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="32" Y="199"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="105"/>
+        <CursorPos X="5" Y="123"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
@@ -61,6 +63,7 @@
         <Bookmarks Count="1">
           <Item0 Y="388" ID="1"/>
         </Bookmarks>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\synapse40\source\lib\blcksock.pas"/>
@@ -70,7 +73,7 @@
         <UsageCount Value="13"/>
       </Unit5>
     </Units>
-    <JumpHistory Count="22" HistoryIndex="21">
+    <JumpHistory Count="26" HistoryIndex="24">
       <Position1>
         <Filename Value="Unit1.pas"/>
         <Caret Line="103" Column="5" TopLine="93"/>
@@ -159,6 +162,22 @@
         <Filename Value="Unit1.pas"/>
         <Caret Line="53" Column="10" TopLine="37"/>
       </Position22>
+      <Position23>
+        <Filename Value="Unit1.pas"/>
+        <Caret Line="56" Column="6" TopLine="44"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\conSockServer.pas"/>
+        <Caret Line="303" Column="9" TopLine="282"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\conSockServer.pas"/>
+        <Caret Line="304" Column="9" TopLine="282"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\conSockFrames.pas"/>
+        <Caret Line="123" Column="5" TopLine="105"/>
+      </Position26>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
