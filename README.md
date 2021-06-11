@@ -15,9 +15,9 @@ The connection model is similar to a Client-Server architecture, with the follow
 
 1. To implement a communication, there must be one Client and one Server part.
 2. Client part must be set with the IP address of the Server part. Server don't need to be set.
-3. Server part can connect only to one client. If there are more than one client connecting to the same server, only the first will accepted.
+3. Server part can connect only to one client at the same time. If there are more than one client connecting to the same server, only the first will be accepted.
 4. Once the connection is established, only client can start communication. The server can respond only to a request from the client.
-5. All comnunication is implemented using the same Frame strcuture.
+5. All comnunication is implemented using the same Frame structure.
 
 Default IP for Client is 127.0.0.1.
 Default port for Client and Server is 80.
@@ -53,7 +53,7 @@ Parameters X and Y, can be used to send additional information for a command.
 
 The "Data part size" indicates the size of the "Data part".
 
-As the "Data part size" field is 3 bytes 
+As the "Data part size" field is 3 bytes, the max size for data is 8^24 bytes.
 
 # Library
 
@@ -88,7 +88,7 @@ To implements a simple connection, it's needed to create a client part and a ser
 
 The event OnFrameReady is trigered every time a Frame is received.
 
-The state of the connection can be read in the field client.state and in server.State. This state can be:
+The state of the connection can be read in the field "client.State" and in "server.State". This state can be:
 
 * cecCONNECTING
 * cecCONNECTED
