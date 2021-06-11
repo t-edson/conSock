@@ -64,7 +64,7 @@ The library constains 3 units:
 * conSockServer.pas.- Defines the base server object TConSockServer.
 
 
-To implement a basic connection, it's needed to create a client and server objtec.
+To implement a basic connection, it's needed to create a client and server object.
 
 Client Part.- Modeled with the object TConSockClient.
 
